@@ -1,4 +1,4 @@
-package com.cwave._jang6bu;
+package com.cwave.member;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

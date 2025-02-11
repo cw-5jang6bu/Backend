@@ -1,4 +1,4 @@
-package com.cwave._jang6bu;
+package com.cwave.member;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
