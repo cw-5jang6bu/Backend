@@ -6,11 +6,13 @@ import com.cwave.product.order.entity.Order;
 import com.cwave.product.order.entity.OrderItem;
 import com.cwave.product.order.repository.OrderItemRepository;
 import com.cwave.product.order.repository.OrderRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -47,5 +49,6 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void cancelOrder(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        order.cancel();
     }
 }
