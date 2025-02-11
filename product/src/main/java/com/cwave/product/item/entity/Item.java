@@ -40,7 +40,7 @@ public class Item {
     /**
      * 상품 이미지
      */
-    @Column(name = "imgUrl")
+    @Column(name = "img_url")
     private String imgUrl;
 
 }
