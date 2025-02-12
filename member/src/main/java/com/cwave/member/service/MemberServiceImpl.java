@@ -36,8 +36,8 @@ public class MemberServiceImpl implements MemberService {
         return existingMember; // 로그인 성공
     }
 
-    @Override
-    public void deleteMember(Long id) {
-        memberRepository.deleteById(id); // 회원 삭제
-    }
+//    @Override
+//    public void deleteMember(Long id) {
+//        memberRepository.deleteById(id); // 회원 삭제
+//    }
 }
