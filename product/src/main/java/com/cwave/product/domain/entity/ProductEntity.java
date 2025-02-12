@@ -9,11 +9,12 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
+@Builder
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductsEntity {
+public class ProductEntity {
     /**
      * 상품 고유 id
      */
@@ -35,6 +36,6 @@ public class ProductsEntity {
      * 상품 가격
      */
     @Column(name = "product_price")
-    private int price;
+    private Integer price;
 
 }

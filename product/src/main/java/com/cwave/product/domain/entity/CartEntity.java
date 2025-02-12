@@ -1,19 +1,18 @@
-package com.cwave.product.order.entity;
+package com.cwave.product.domain.entity;
 
-import com.cwave.product.item.entity.Item;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
+@Builder
 @Table(name = "cart")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
-public class Cart {
+public class CartEntity {
 
     /**
      * 장바구니 고유 아이디
@@ -23,28 +22,15 @@ public class Cart {
     @Column(name = "cart_id")
     private Long id;
     /**
-     * 주문할 아이템
+     * 이메일 주소
      */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @Column(name = "member_id")
+    private Long memberId;
     /**
      * 주문 상품 개수
      */
-    @Column(name = "count")
-    private Integer count;
-    /**
-     * 주문 정보
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @Builder
-    public Cart(Integer count, Item item, Order order) {
-        this.count = count;
-        this.item = item;
-        this.order = order;
-    }
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<CartItemEntity> items = new ArrayList<>();
 
 }

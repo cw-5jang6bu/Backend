@@ -1,4 +1,4 @@
-package com.cwave.product.order.entity;
+package com.cwave.product.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,10 +16,11 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Entity
-@Table(name = "order")
+@Builder
+@Table(name = "`order`")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Order {
+public class OrderEntity {
 
     /**
      * 주문 고유 id
@@ -31,17 +32,17 @@ public class Order {
     /**
      * 주문한 회원 email
      */
-    @Column(name = "member_email")
-    private String memberEmail;
+    @Column(name = "order_member_id")
+    private Long memberId;
     /**
      * 주문 배송 주소
      */
-    @Column(name = "address")
+    @Column(name = "order_address")
     private String address;
     /**
      * 주문자 이름
      */
-    @Column(name = "name")
+    @Column(name = "order_member_name")
     private String name;
     /**
      * 주문한 시각
@@ -50,21 +51,8 @@ public class Order {
     @Column(name = "order_time")
     private LocalDateTime orderTime;
     /**
-     * 주문 취소여부
+     * 총 가격
      */
-    @Column(name = "is_active")
-    private boolean isActive;
-
-    @Builder
-    public Order(String memberEmail, String address, String name) {
-        this.memberEmail = memberEmail;
-        this.address = address;
-        this.name = name;
-        isActive = true;
-    }
-
-    public void cancel() {
-        this.isActive = false;
-    }
-
+    @Column(name = "order_total_amount")
+    private Integer totalAmount;
 }

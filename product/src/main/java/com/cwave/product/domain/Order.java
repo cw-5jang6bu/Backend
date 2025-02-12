@@ -1,20 +1,20 @@
 package com.cwave.product.domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateOrderDto {
+public class Order {
 
-    private List<OrderItemDto> itemList;
+    private Long id;
     private Long memberId;
-    private String name;
     private String address;
+    private String name;
+    private LocalDateTime orderTime;
+    private Integer totalAmount;
 }
