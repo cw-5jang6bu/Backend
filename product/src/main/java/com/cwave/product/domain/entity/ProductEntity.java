@@ -1,4 +1,4 @@
-package com.cwave.product.item.entity;
+package com.cwave.product.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,37 +10,31 @@ import lombok.*;
 
 @Getter
 @Entity
-@Table(name = "item")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "products")
+@NoArgsConstructor
 @AllArgsConstructor
-public class Item {
-
+public class ProductsEntity {
     /**
      * 상품 고유 id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "item_id")
+    @Column(name = "product_id")
     private Long id;
     /**
      * 상품 명
      */
-    @Column(name = "name")
+    @Column(name = "product_name")
     private String name;
     /**
      * 상품 재고 수량
      */
-    @Column(name = "stock")
-    private Long stock;
+    @Column(name = "product_stock")
+    private Integer stock;
     /**
      * 상품 가격
      */
-    @Column(name = "price")
-    private Integer price;
-    /**
-     * 상품 이미지
-     */
-    @Column(name = "img_url")
-    private String imgUrl;
+    @Column(name = "product_price")
+    private int price;
 
 }

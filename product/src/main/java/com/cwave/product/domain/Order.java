@@ -1,6 +1,7 @@
-package com.cwave.product.order.dto;
+package com.cwave.product.domain;
 
 import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

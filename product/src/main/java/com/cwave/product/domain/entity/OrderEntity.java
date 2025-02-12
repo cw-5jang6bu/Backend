@@ -16,7 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Entity
-@Table(name = "orders")
+@Table(name = "order")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Order {
@@ -29,10 +29,10 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
     /**
-     * 주문한 회원 id
+     * 주문한 회원 email
      */
-    @Column(name = "member_id")
-    private Long memberId;
+    @Column(name = "member_email")
+    private String memberEmail;
     /**
      * 주문 배송 주소
      */
@@ -56,8 +56,8 @@ public class Order {
     private boolean isActive;
 
     @Builder
-    public Order(Long memberId, String address, String name) {
-        this.memberId = memberId;
+    public Order(String memberEmail, String address, String name) {
+        this.memberEmail = memberEmail;
         this.address = address;
         this.name = name;
         isActive = true;

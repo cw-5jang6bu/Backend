@@ -1,4 +1,4 @@
-package com.cwave.product.order.dto;
+package com.cwave.product.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
