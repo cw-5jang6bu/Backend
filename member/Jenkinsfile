@@ -42,7 +42,6 @@ pipeline {
                 }
             }
         }
-
         stage('Docker Build & Push') {
             when { expression { env.MEMBER_CHANGED.toBoolean() } }
             steps {
