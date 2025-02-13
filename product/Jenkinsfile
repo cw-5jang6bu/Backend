@@ -10,19 +10,7 @@ pipeline {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/cw-5jang6bu/Backend.git'
             }
         }
-
-
-       stage('Check Changes') {
-             steps {
-                script {
-                    def changedFiles = sh(script: "git diff --name-only origin/main", returnStdout: true).trim()
-                    env.PRODUCT_CHANGED = changedFiles.split("\n").find { it.startsWith("product/") } ? "true" : "false"
-                }
-             }
-         }
-
         stage('Prepare .env File') {
-            when { expression { env.PRODUCT_CHANGED.toBoolean() } }
             steps {
                 script {
                     writeFile file: './product/.env', text: "${ENV_FILE}"
@@ -31,7 +19,6 @@ pipeline {
             }
         }
         stage('Build API Project') {
-            when { expression { env.PRODUCT_CHANGED.toBoolean() } }
             steps {
                 script {
                     // 프로젝트 권한 변경
@@ -43,9 +30,7 @@ pipeline {
                 }
             }
         }
-
         stage('Docker Build & Push') {
-            when { expression { env.PRODUCT_CHANGED.toBoolean() } }
             steps {
                 script {
                     def app = docker.build("034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-product", "./product")
