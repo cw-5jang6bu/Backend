@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    environment {
+        ENV_FILE = credentials('DEV_BACK_PRODUCT_ENV')
+        AWS_CREDENTIALS = 'ECR_ID'
+    }
+    stages {
+        stage('github-clone') {
+            steps {
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/cw-5jang6bu/Backend.git'
+            }
+        }
+        stage('Prepare .env File') {
+            steps {
+                script {
+                    writeFile file: './product/.env', text: "${ENV_FILE}"
+                    sh 'cat ./product/.env'
+                }
+            }
+        }
+        stage('Build API Project') {
+            steps {
+                script {
+                    // 프로젝트 권한 변경
+                    sh 'chmod +x ./product/gradlew'
+                    // 프로젝트 빌드
+                    dir('./product') {
+                        sh './gradlew build -x test'
+                    }
+                }
+            }
+        }
+
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    def app = docker.build("034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-product", "./product")
+
+                        docker.withRegistry("https://034362047320.dkr.ecr.ap-northeast-2.amazonaws.com", "ecr:ap-northeast-2:${AWS_CREDENTIALS}") {
+                            app.push("dev-product")
+                            app.push("latest")
+                        }
+
+                }
+            }
+        }
+    }
+}
