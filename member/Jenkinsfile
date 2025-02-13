@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         ENV_FILE = credentials('DEV_BACK_MEMBER_ENV')
+        ENV_FILE_PRODUCT = credentials('DEV_BACK_PRODUCT_ENV')
         AWS_CREDENTIALS = 'ECR_ID'
     }
     stages {
@@ -15,6 +16,7 @@ pipeline {
                 script {
                     def changedFiles = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim()
                     env.MEMBER_CHANGED = changedFiles.split("\n").find { it.startsWith("member/") } ? "true" : "false"
+                    env.PRODUCT_CHANGED = changedFiles.split("\n").find { it.startsWith("product/") } ? "true" : "false"
                 }
              }
          }
