@@ -4,6 +4,7 @@ pipeline {
         ENV_FILE = credentials('DEV_BACK_PRODUCT_ENV')
         AWS_CREDENTIALS = 'ECR_ID'
     }
+
     stages {
         stage('github-clone') {
             steps {
@@ -39,6 +40,8 @@ pipeline {
                             app.push("dev-product")
                             app.push("latest")
                         }
+                    // 기존의 이미지 삭제
+                    sh 'docker rmi $(docker images -f "dangling=true" -q) || true'
                 }
             }
         }

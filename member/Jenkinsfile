@@ -40,6 +40,8 @@ pipeline {
                             app.push("dev-member")
                             app.push("latest")
                         }
+                    // 기존의 이미지 삭제
+                    sh 'docker rmi $(docker images -f "dangling=true" -q) || true'
                 }
             }
         }
