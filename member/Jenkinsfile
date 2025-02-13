@@ -34,6 +34,9 @@ pipeline {
         stage('Docker Build & Push') {
             steps {
                 script {
+                    // 기존의 이미지 삭제
+                    sh "sudo docker rmi -f 034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-member || true"
+
                     def app = docker.build("034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-member", "./member")
 
                         docker.withRegistry("https://034362047320.dkr.ecr.ap-northeast-2.amazonaws.com", "ecr:ap-northeast-2:${AWS_CREDENTIALS}") {
