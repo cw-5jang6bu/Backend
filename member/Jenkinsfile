@@ -10,17 +10,14 @@ pipeline {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/cw-5jang6bu/Backend.git'
             }
         }
-
-         stage('Check Changes') {
-              steps {
+        stage('Check Changes') {
+             steps {
                 script {
                     def changedFiles = sh(script: "git diff --name-only HEAD~1", returnStdout: true).trim()
-
                     env.MEMBER_CHANGED = changedFiles.split("\n").find { it.startsWith("member/") } ? "true" : "false"
                 }
+             }
          }
-
-
         stage('Prepare .env File') {
             when { expression { env.MEMBER_CHANGED.toBoolean() } }
             steps {
