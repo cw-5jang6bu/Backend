@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-config
+  namespace: product
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  DATABASE_HOST: "db-service.product.svc.cluster.local"
+  DATABASE_PORT: "5432"
+  REDIS_HOST: "redis-service.product.svc.cluster.local"
+  REDIS_PORT: "6379"
+  API_URL: "https://api.product.com"
+  FEATURE_FLAG: "true"
