@@ -1,3 +1,29 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: product-app
+#   namespace: product
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: product
+#   template:
+#     metadata:
+#       labels:
+#         app: product
+#     spec:
+#       containers:
+#         - name: product
+#           image: 034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-product:latest
+#           ports:
+#             - containerPort: 8080
+#           envFrom:
+#             - configMapRef:
+#                 name: product-config
+
+
+# new yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,8 +42,10 @@ spec:
       containers:
         - name: product
           image: 034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-product:latest
+          command: ["/bin/sh", "-ec", "while :; do echo 'Hello World'; sleep 5 ; done"]
           ports:
             - containerPort: 8080
           envFrom:
             - configMapRef:
                 name: product-config
+
