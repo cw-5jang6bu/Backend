@@ -19,5 +19,5 @@ kind: ConfigMap
 metadata:
   name: product-config
   namespace: product
-data:
-  DEV_DB_URL_PRODUCT: "jdbc:mysql://db-service.product.svc.cluster.local:3306/productdb?useSSL=false&serverTimezone=UTC"
+# data:
+#   DEV_DB_URL_PRODUCT: "jdbc:mysql://db-service.product.svc.cluster.local:3306/productdb?useSSL=false&serverTimezone=UTC"
