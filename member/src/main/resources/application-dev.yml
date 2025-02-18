@@ -1,17 +1,17 @@
-spring:
-  application:
-    name: member
-  config:
-    import: optional:file:.env[.properties]
-    activate:
-      on-profile: dev
-  datasource:
-    url: ${DEV_DB_URL_MEMBER}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DEV_DB_USERNAME}
-    password: ${DEV_DB_PASSWORD}
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+#spring:
+#  application:
+#    name: member
+#  config:
+#    import: optional:file:.env[.properties]
+#    activate:
+#      on-profile: dev
+#  datasource:
+#    url: ${DEV_DB_URL_MEMBER}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: ${DEV_DB_USERNAME}
+#    password: ${DEV_DB_PASSWORD}
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
