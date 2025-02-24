@@ -2,46 +2,40 @@ package com.cwave.member.service;
 
 import com.cwave.member.dto.CouponResponseDto;
 import com.cwave.member.entity.Coupon;
-import com.cwave.member.entity.User;
+import com.cwave.member.entity.Member;
 import com.cwave.member.repository.CouponRepository;
-import com.cwave.member.repository.UserRepository;
+import com.cwave.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CouponService {
-    private final UserRepository userRepository;
     private final CouponRepository couponRepository;
-    private final RedisTemplate<String, Boolean> redisTemplate;
+    private final MemberRepository memberRepository;
 
-    private static final String COUPON_CACHE_PREFIX = "coupon:";
+    /**
+     * 회원의 쿠폰 발급 여부 확인
+     */
+    public CouponResponseDto checkCouponIssued(String memberId) {
+        Optional<Member> memberOptional = memberRepository.findById(Long.parseLong(memberId));
 
-    public CouponResponseDto getCouponStatus(String userid) {
-        String cacheKey = COUPON_CACHE_PREFIX + userid;
-
-        // Redis cache에서 조회
-        Boolean cacheCoupon = redisTemplate.opsForValue().get(cacheKey);
-        if (cacheCoupon != null) {
-            return new CouponResponseDto(userid, Boolean.parseBoolean(cacheCoupon.toString()));
+        if (memberOptional.isEmpty()) {
+            return new CouponResponseDto(memberId, false, "회원 정보가 없습니다.", null);
         }
 
-        // RDS 조회
-        Optional<User> userOpt = userRepository.findByUserId(userid);
-        if (userOpt.isEmpty()) {
-            throw new RuntimeException("사용자를 찾을 수 없습니다.");
+        // ✅ MySQL에서 쿠폰 조회
+        Optional<Coupon> couponOptional = couponRepository.findByMember(memberOptional.get());
+
+        if (couponOptional.isEmpty()) {
+            return new CouponResponseDto(memberId, false, "쿠폰을 발급받은 적이 없습니다.", null);
         }
 
-        Optional<Coupon> couponOpt = couponRepository.findByUser(userOpt.get());
-        boolean issued = couponOpt.map(Coupon::isIssued).orElse(false);
-
-        // Redis에 저장 ( 만료 시간 10분 )
-        redisTemplate.opsForValue().set(cacheKey, issued, 10, TimeUnit.MINUTES);
-
-        return new CouponResponseDto(userid, issued);
+        return new CouponResponseDto(memberId, true, "쿠폰이 정상적으로 발급되었습니다.", null);
     }
 }
+

@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class CouponResponseDto {
-    private String userid;
+    private String memberId;
     private boolean issued;
+    private String message;
+    private Object timezone;
 }

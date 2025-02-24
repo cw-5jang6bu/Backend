@@ -19,16 +19,22 @@ public class RedisConfig {
         return new LettuceConnectionFactory("localhost", 6379); // application.yml에서 설정된 Redis로 진행
     }
 
+
     @Bean
-    public RedisTemplate<String, Boolean> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, Boolean> template = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
-        // ✅ Key Serializer: 문자열 형태로 저장
+        // ✅ Key Serializer 설정
         template.setKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
 
-        // ✅ Value Serializer: JSON 형태로 저장 (Boolean 값을 변환 가능)
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        // ✅ GenericJackson2JsonRedisSerializer 사용 (타입 정보 자동 포함)
+        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer();
+
+        // ✅ Value Serializer 설정
+        template.setValueSerializer(serializer);
+        template.setHashValueSerializer(serializer);
 
         template.afterPropertiesSet();
         return template;

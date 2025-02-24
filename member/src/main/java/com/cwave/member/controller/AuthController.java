@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthResponseDto login(@RequestBody AuthRequestDto req) {
-        log.info("login auth request: {}", req.getUserid());
+        log.info("login auth request: {}", req.getEmail());
         return authService.login(req);
     }
 }
