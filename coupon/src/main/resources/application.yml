@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb  # ✅ H2 인메모리 데이터베이스 사용
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update  # ✅ 애플리케이션 실행 시 테이블 자동 생성
+    show-sql: true  # ✅ 실행되는 SQL 쿼리 출력
+  h2:
+    console:
+      enabled: true  # ✅ H2 웹 콘솔 활성화
+      path: /h2-console  # ✅ 브라우저에서 H2 DB 확인 가능
+  data:
+    redis:
+      host: localhost  # ✅ Docker에서 실행 중인 Redis 컨테이너 IP
+      port: 6379
+

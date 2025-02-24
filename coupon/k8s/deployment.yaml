@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coupon-app
+  namespace: coupon
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coupon
+  template:
+    metadata:
+      labels:
+        app: coupon
+    spec:
+      containers:
+        - name: coupon
+          image: 034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-member:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: coupon-config

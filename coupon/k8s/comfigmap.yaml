@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coupon-config
+  namespace: coupon
+data:
+  REDIS_HOST: "clustercfg.dev-elasti-cluster.lbkn6z.apn2.cache.amazonaws.com:6379"
+  REDIS_PORT: "6379"
