@@ -1,7 +1,7 @@
 package com.cwave.member.controller;
 
-import com.cwave.coupon.dto.CouponResponseDto;
-import com.cwave.coupon.service.CouponService;
+import com.cwave.member.dto.CouponResponseDto;
+import com.cwave.member.service.CouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

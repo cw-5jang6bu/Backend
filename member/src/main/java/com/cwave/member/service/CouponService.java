@@ -1,10 +1,10 @@
 package com.cwave.member.service;
 
-import com.cwave.coupon.dto.CouponResponseDto;
-import com.cwave.coupon.entity.Coupon;
-import com.cwave.coupon.entity.User;
-import com.cwave.coupon.repository.CouponRepository;
-import com.cwave.coupon.repository.UserRepository;
+import com.cwave.member.dto.CouponResponseDto;
+import com.cwave.member.entity.Coupon;
+import com.cwave.member.entity.User;
+import com.cwave.member.repository.CouponRepository;
+import com.cwave.member.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

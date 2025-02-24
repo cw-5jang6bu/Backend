@@ -1,9 +1,9 @@
 package com.cwave.member.service;
 
-import com.cwave.coupon.dto.AuthRequestDto;
-import com.cwave.coupon.dto.AuthResponseDto;
-import com.cwave.coupon.entity.User;
-import com.cwave.coupon.repository.UserRepository;
+import com.cwave.member.dto.AuthRequestDto;
+import com.cwave.member.dto.AuthResponseDto;
+import com.cwave.member.entity.User;
+import com.cwave.member.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.cwave.member.repository;
 
-import com.cwave.coupon.entity.Coupon;
-import com.cwave.coupon.entity.User;
+import com.cwave.member.entity.Coupon;
+import com.cwave.member.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

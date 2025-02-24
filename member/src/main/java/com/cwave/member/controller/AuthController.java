@@ -1,8 +1,8 @@
 package com.cwave.member.controller;
 
-import com.cwave.coupon.dto.AuthRequestDto;
-import com.cwave.coupon.dto.AuthResponseDto;
-import com.cwave.coupon.service.AuthService;
+import com.cwave.member.dto.AuthRequestDto;
+import com.cwave.member.dto.AuthResponseDto;
+import com.cwave.member.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

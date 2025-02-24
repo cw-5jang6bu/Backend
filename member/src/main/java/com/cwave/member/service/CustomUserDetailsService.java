@@ -1,7 +1,7 @@
 package com.cwave.member.service;
 
-import com.cwave.coupon.entity.User;
-import com.cwave.coupon.repository.UserRepository;
+import com.cwave.member.entity.User;
+import com.cwave.member.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
