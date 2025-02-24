@@ -16,6 +16,7 @@ spec:
       containers:
         - name: member
           image: 034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-member:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
