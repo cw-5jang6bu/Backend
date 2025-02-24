@@ -11,17 +11,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "coupons")
+@Table(name = "coupon")
 public class Coupon {
 
     @Id
+    @Column(name = "coupon_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(nullable = false)
-    private boolean issued;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 }

@@ -2,7 +2,7 @@ package com.cwave.coupon.service;
 
 import com.cwave.coupon.dto.CouponResponseDto;
 import com.cwave.coupon.entity.Coupon;
-import com.cwave.coupon.entity.User;
+import com.cwave.coupon.entity.Member;
 import com.cwave.coupon.repository.CouponRepository;
 import com.cwave.coupon.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,13 +37,13 @@ class CouponServiceTest {
     @InjectMocks
     private CouponService couponService;
 
-    private User user;
+    private Member member;
     private Coupon coupon;
 
     @BeforeEach
     void setUp() {
-        user = new User(1L, "testUser", "password");
-        coupon = new Coupon(1L, user, true);
+        member = new Member(1L, "testUser", "password");
+        coupon = new Coupon(1L, member, true);
     }
 
     @Test

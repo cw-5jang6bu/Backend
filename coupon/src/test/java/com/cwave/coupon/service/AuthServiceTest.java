@@ -2,7 +2,7 @@ package com.cwave.coupon.service;
 
 import com.cwave.coupon.dto.AuthRequestDto;
 import com.cwave.coupon.dto.AuthResponseDto;
-import com.cwave.coupon.entity.User;
+import com.cwave.coupon.entity.Member;
 import com.cwave.coupon.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,11 +29,11 @@ class AuthServiceTest {
     @InjectMocks
     private AuthService authService;
 
-    private User user;
+    private Member member;
 
     @BeforeEach
     void setUp() {
-        user = new User(1L, "testUser", "password");
+        member = new Member(1L, "testUser", "password");
     }
 
     @Test
@@ -41,7 +41,7 @@ class AuthServiceTest {
         // given
         AuthRequestDto requestDto = new AuthRequestDto("testUser", "password");
 
-        when(userRepository.findByUserId("testUser")).thenReturn(Optional.of(user));
+        when(userRepository.findByUserId("testUser")).thenReturn(Optional.of(member));
         when(passwordEncoder.matches("password", "encodedPassword")).thenReturn(true);
 
         // when
@@ -57,7 +57,7 @@ class AuthServiceTest {
         // given
         AuthRequestDto requestDto = new AuthRequestDto("testUser", "wrongPassword");
 
-        when(userRepository.findByUserId("testUser")).thenReturn(Optional.of(user));
+        when(userRepository.findByUserId("testUser")).thenReturn(Optional.of(member));
         when(passwordEncoder.matches("wrongPassword", "encodedPassword")).thenReturn(false);
 
         // when & then

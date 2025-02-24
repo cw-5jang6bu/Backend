@@ -17,4 +17,5 @@ spring:
     redis:
       host: localhost  # ✅ Docker에서 실행 중인 Redis 컨테이너 IP
       port: 6379
+      database: 0
 

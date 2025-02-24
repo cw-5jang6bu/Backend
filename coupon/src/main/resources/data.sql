@@ -1,2 +1,2 @@
-INSERT INTO users (id, userid, password) VALUES (1, 'testUser', 'password'); -- 비밀번호: password
-INSERT INTO coupons (id, user_id, issued) VALUES (1, 1, true);
+INSERT INTO member (member_id, email, password, phone) VALUES (1, 'user@test.com', 'password', '010-8227-8435');
+INSERT INTO coupon (id, member_id) VALUES (1, 1);
