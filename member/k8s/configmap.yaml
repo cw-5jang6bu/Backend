@@ -7,5 +7,3 @@ data:
   DB_HOST: "dev-rds-mq.cxc2mkao053o.ap-northeast-2.rds.amazonaws.com"
   DB_PORT: "3306"
   DB_NAME: "dev_db"
-  REDIS_HOST: "clustercfg.dev-elasti-cluster.lbkn6z.apn2.cache.amazonaws.com:6379"
-  REDIS_PORT: "6379"
