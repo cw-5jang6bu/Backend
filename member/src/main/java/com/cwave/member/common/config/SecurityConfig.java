@@ -33,14 +33,13 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ✅ CORS 설정 추가 (React 프론트엔드에서 요청 가능하도록 설정)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // ✅ React 개발 서버 도메인
+        configuration.setAllowedOrigins(List.of("http://ab7332c421fb240e58251da541621cbc-1437135698.ap-northeast-2.elb.amazonaws.com"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true); // ✅ 인증 정보를 포함한 요청 허용
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
