@@ -25,9 +25,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // ✅ CSRF 비활성화 (JWT 사용 시 필요)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ 세션 비활성화
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login","/coupons/", "/coupons/me").permitAll()
+                        .requestMatchers("/auth/login", "/coupons/", "/coupons/me").permitAll()
                         .requestMatchers("/auth/**", "/coupons/**").permitAll() // ✅ 인증 없이 접근 가능
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() // ✅ 모든 요청 허용 (테스트용)
                 );
 
         return http.build();
@@ -36,10 +36,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://ab7332c421fb240e58251da541621cbc-1437135698.ap-northeast-2.elb.amazonaws.com"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(List.of("*")); // ✅ 모든 도메인 허용
+        configuration.setAllowedMethods(List.of("*")); // ✅ 모든 HTTP 메서드 허용
+        configuration.setAllowedHeaders(List.of("*")); // ✅ 모든 헤더 허용
+        configuration.setAllowCredentials(false); // ❌ 모든 Origin을 허용할 경우 Credentials 사용 불가
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
