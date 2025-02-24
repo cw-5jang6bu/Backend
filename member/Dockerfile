@@ -13,8 +13,8 @@ COPY .env /app/.env
 # WORKDIR 설정
 WORKDIR /app
 
-# 컨테이너 내부에서 사용할 포트를 명시적으로 설정
-EXPOSE 8080
+## 컨테이너 내부에서 사용할 포트를 명시적으로 설정
+#EXPOSE 8080
 
 # Docker run 시 실행할 명령어를 설정합니다.
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=dev", "-Duser.timezone=Asia/Seoul", "/app/member-0.0.1-SNAPSHOT.jar"]
