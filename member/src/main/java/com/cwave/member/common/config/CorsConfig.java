@@ -14,12 +14,14 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // ✅ 모든 엔드포인트에 대해 CORS 허용
-                        .allowedOrigins("http://a92d300e18d96469bbc796aafd2bbd75-75210889.ap-northeast-2.elb.amazonaws.com/") // ✅ React 앱 주소 (배포 시 변경 필요)
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedOrigins("http://a92d300e18d96469bbc796aafd2bbd75-75210889.ap-northeast-2.elb.amazonaws.com") // ✅ 올바른 React 앱 주소
+                        .allowedMethods("*") // ✅ 모든 HTTP 메서드 허용
+                        .allowedHeaders("*") // ✅ 모든 헤더 허용
+                        .allowCredentials(true) // ✅ 인증 정보 포함 (필요 시)
+                        .allowedOriginPatterns("*"); // 모든 출처 허용 (Spring Boot 3.x 이상)
             }
         };
     }
 }
+
 
