@@ -21,3 +21,5 @@ spec:
           envFrom:
             - configMapRef:
                 name: member-config
+            - secretRef:
+                name: member-secret
