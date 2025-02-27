@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('github-clone') {
             steps {
-                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/cw-5jang6bu/Backend.git'
+                git branch: 'product', credentialsId: 'github-token', url: 'https://github.com/cw-5jang6bu/Backend.git'
             }
         }
         stage('Prepare .env File') {
