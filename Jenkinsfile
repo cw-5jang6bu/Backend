@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    environment {
+        ENV_FILE = credentials('DEV_BACK_MEMBER_ENV')
+        ENV_FILE_PRODUCT = credentials('DEV_BACK_PRODUCT_ENV')
+        AWS_CREDENTIALS = 'ECR_ID'
+    }
+    stages {
+        stage('github-clone') {
+            steps {
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/cw-5jang6bu/Backend.git'
+            }
+        }
+        stage('Prepare .env File') {
+            steps {
+                script {
+                    writeFile file: './member/.env', text: "${ENV_FILE}"
+                    sh 'cat ./member/.env'
+                }
+            }
+        }
+        stage('Build API Project') {
+            steps {
+                script {
+                    // 프로젝트 권한 변경
+                    sh 'chmod +x ./member/gradlew'
+                    // 프로젝트 빌드
+                    dir('./member') {
+                        sh './gradlew build -x test'
+                    }
+                }
+            }
+        }
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    def app = docker.build("034362047320.dkr.ecr.ap-northeast-2.amazonaws.com/cwave01/back-member", "./member")
+
+                        docker.withRegistry("https://034362047320.dkr.ecr.ap-northeast-2.amazonaws.com", "ecr:ap-northeast-2:${AWS_CREDENTIALS}") {
+                            app.push("dev-member")
+                            app.push("latest")
+                        }
+                    // 기존의 이미지 삭제
+                    sh 'docker rmi $(docker images -f "dangling=true" -q) || true'
+                }
+            }
+        }
+    }
+}
